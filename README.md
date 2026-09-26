@@ -1,343 +1,138 @@
-❤️ Heart Disease Prediction using Machine Learning
+# ❤️ Heart Disease Prediction
 
+🔗 **Live Demo:** [Add your deployed app link here](#)
 
+## 📌 About
 
-📌 Project Overview
+This project builds a complete supervised ML pipeline on the **UCI Heart Disease** dataset and exposes it through a simple, clean **Flask** web app where a user enters clinical values and gets an instant prediction.
 
-Heart Disease Prediction is a Machine Learning project that predicts whether a person is likely to have heart disease based on selected medical parameters.
+**Pipeline highlights:**
 
-The project includes data preprocessing, feature selection, data balancing, feature scaling, multiple machine learning algorithms, model evaluation, model saving, and a Flask web application.
+- 🧹 Outlier handling via **Yeo-Johnson transformation** + IQR trimming
+- 🎯 **Feature selection** — constant, quasi-constant, and hypothesis-testing based filtering
+- ⚖️ Class balancing with **SMOTE**
+- 📏 Feature scaling with **StandardScaler**
+- 🤖 Training & comparison of **8 classification algorithms**
+- 💾 Best model (**Gaussian Naive Bayes**) persisted for real-time inference
+- 🌐 Deployed as a lightweight **Flask + gunicorn** web service
 
-This project was developed as part of the Vihara Tech learning/internship project.
+---
 
-🚀 Live Deployment
+| Field | Description |
+|---|---|
+| `age` | Patient's age |
+| `sex` | 1 = male, 0 = female |
+| `cp` | Chest pain type (0–3) |
+| `thalach` | Max heart rate achieved |
+| `oldpeak` | ST depression induced by exercise |
+| `slope` | Slope of peak exercise ST segment |
+| `thal` | Thalassemia indicator |
 
-🔗 Live Demo: Click here to use the Heart Disease Prediction App
+---
 
-Replace YOUR_DEPLOYMENT_LINK with your deployed application URL.
+## 🗂️ Project Structure
 
-🎯 Objective
-
-The objective of this project is to build a Machine Learning classification system that predicts whether heart disease is detected based on patient input features.
-
-🧠 Machine Learning Workflow
-
-Dataset
-   ↓
-Data Loading
-   ↓
-Train-Test Split
-   ↓
-Yeo-Johnson Transformation
-   ↓
-Outlier Handling
-   ↓
-Feature Selection
-   ↓
-SMOTE Data Balancing
-   ↓
-Standard Scaling
-   ↓
-Model Training
-   ↓
-Model Evaluation
-   ↓
-Gaussian Naive Bayes Model
-   ↓
-Save Model + Scaler
-   ↓
-Flask Web Application
-   ↓
-Heart Disease Prediction
-
-📂 Project Structure
-
+```
 Heart-Disease-Prediction/
 │
-├── heart.csv
-├── main.py
-├── variable_transformation.py
-├── feature_selection.py
-├── all_models.py
-├── log.py
-├── app.py
-├── model.pkl
-├── scaled.pkl
-├── requirements.txt
-├── Procfile
-├── logo.png
+├── app.py                       # Flask app — loads model.pkl & scaled.pkl, serves predictions
+├── main.py                      # Orchestrates the full training pipeline (HEART class)
+├── variable_transformation.py   # Yeo-Johnson transform + IQR-based outlier trimming
+├── feature_selection.py         # Constant / quasi-constant / hypothesis-test feature filtering
+├── all_models.py                # Trains & evaluates 8 ML algorithms
+├── log.py                       # Centralized logger factory
+├── heart.csv                    # Training dataset
+├── model.pkl                    # Serialized trained model (Gaussian Naive Bayes)
+├── scaled.pkl                   # Serialized StandardScaler used at inference
+├── requirements.txt             # Python dependencies
+├── Procfile                     # Deployment process definition (gunicorn)
 ├── templates/
-│   └── index.html
-├── logs/
-│   └── main.log
-└── README.md
+│   └── index.html               # Web UI (form + result)
+└── logs/                        # Auto-generated log files (create empty folder if missing)
+```
 
-🛠️ Technologies Used
+---
 
-Python
+## 🧠 ML Pipeline
 
-Pandas
+The `HEART` class in `main.py` runs everything end to end:
 
-NumPy
+| Step | Method | What it does |
+|---|---|---|
+| 1 | `__init__` | Loads `heart.csv`, splits 80/20 train/test |
+| 2 | `variable_transformation_outliers()` | Yeo-Johnson transform + IQR trimming on every feature |
+| 3 | `best_col()` | Drops constant, quasi-constant & statistically insignificant columns |
+| 4 | `data_balancing()` | Balances classes with **SMOTE**, scales with **StandardScaler** |
+| 5 | `all_model()` | Trains & logs metrics for KNN, Naive Bayes, Logistic Regression, Decision Tree, Random Forest, AdaBoost, Gradient Boosting, XGBoost |
+| 6 | `best_model()` | Fits final **Gaussian Naive Bayes**, exports `model.pkl` + `scaled.pkl` |
 
-Scikit-learn
+Run the training pipeline:
 
-SciPy
-
-Imbalanced-learn
-
-XGBoost
-
-Matplotlib
-
-Seaborn
-
-Flask
-
-🔄 Data Preprocessing
-
-1. Train-Test Split
-
-The dataset is divided into training and testing data using an 80:20 split.
-
-2. Yeo-Johnson Transformation
-
-Yeo-Johnson transformation is applied to the input features before outlier handling.
-
-3. Outlier Handling
-
-The project uses the Interquartile Range (IQR) method:
-
-IQR = Q3 - Q1
-Upper Limit = Q3 + 1.5 × IQR
-Lower Limit = Q1 - 1.5 × IQR
-
-Values outside the limits are trimmed to the corresponding boundary values.
-
-4. Feature Selection
-
-Variance Threshold is used for constant and quasi-constant feature selection.
-
-5. SMOTE
-
-SMOTE is used to balance the training dataset.
-
-6. Standard Scaling
-
-StandardScaler is used to scale the features before model training.
-
-🤖 Machine Learning Models
-
-The project compares the following classification algorithms:
-
-Model
-
-Algorithm
-
-KNN
-
-K-Nearest Neighbors
-
-NB
-
-Gaussian Naive Bayes
-
-LR
-
-Logistic Regression
-
-DT
-
-Decision Tree
-
-RF
-
-Random Forest
-
-ADA
-
-AdaBoost
-
-GB
-
-Gradient Boosting
-
-XGB
-
-XGBoost
-
-The models are evaluated using:
-
-Accuracy
-
-Confusion Matrix
-
-Classification Report
-
-🏆 Final Model
-
-Gaussian Naive Bayes is used as the final prediction model.
-
-The trained model is saved as:
-
-model.pkl
-
-The fitted scaler is saved as:
-
-scaled.pkl
-
-These files are loaded by the Flask application for making predictions.
-
-🌐 Flask Web Application
-
-The Flask application provides a user-friendly interface for entering patient information and receiving a prediction.
-
-Input Features
-
-age
-sex
-cp
-thalach
-oldpeak
-slope
-thal
-
-Prediction Results
-
-The application displays:
-
-❤️ Heart Disease Detected
-
-or
-
-💚 No Heart Disease
-
-🚀 Installation
-
-1. Clone the Repository
-
-git clone https://github.com/yourusername/Heart-Disease-Prediction.git
-
-2. Open the Project
-
-cd Heart-Disease-Prediction
-
-3. Create Virtual Environment
-
-python -m venv venv
-
-4. Activate Virtual Environment
-
-Windows
-
-venv\Scripts\activate
-
-Linux / macOS
-
-source venv/bin/activate
-
-5. Install Requirements
-
-pip install -r requirements.txt
-
-▶️ Run the Machine Learning Pipeline
-
+```bash
 python main.py
+```
 
-This performs:
+> ⚠️ `log.py` currently points to a hardcoded Windows path. Change it to a relative path (e.g. `logs/{script_name}.log`) before running elsewhere or deploying.
 
-Data Loading
-→ Preprocessing
-→ Feature Selection
-→ SMOTE
-→ Scaling
-→ Model Comparison
-→ Model Training
-→ Save model.pkl
-→ Save scaled.pkl
+---
 
-🌐 Run the Flask Application
 
+## ⚙️ Installation
+
+```bash
+git clone https://github.com/<your-username>/heart-disease-prediction.git
+cd heart-disease-prediction
+python -m venv venv
+source venv/bin/activate      # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+---
+
+## ▶️ Usage
+
+```bash
 python app.py
+```
 
-Open the application in your browser:
+Then open **http://127.0.0.1:5000** and fill in the form to get a prediction.
 
-http://127.0.0.1:5000/
+---
 
-📊 Model Evaluation
+## 🚀 Deployment
 
-The project uses:
+This repo ships with a **Procfile** (`web: gunicorn app:app`), so it's ready for any Procfile-based host.
 
-Accuracy
+### Render
+1. Push to GitHub → [render.com](https://render.com) → **New → Web Service** → connect repo
+2. Build command: `pip install -r requirements.txt`
+3. Start command: `gunicorn app:app`
+4. Deploy, then paste your live URL into the [Live Demo](#-live-demo) section above ⬆️
 
-Measures the percentage of correctly classified observations.
 
-Confusion Matrix
+## 🛠️ Tech Stack
 
-Shows:
+| Layer | Tools |
+|---|---|
+| Language | Python 3.10+ |
+| ML | scikit-learn, XGBoost, imbalanced-learn |
+| Web Framework | Flask |
+| Server | gunicorn |
+| Deployment | Render / Heroku / Docker (HF Spaces) |
 
-True Positive
+---
 
-True Negative
+## 🔮 Future Improvements
 
-False Positive
+- [ ] Add hyperparameter tuning (GridSearchCV) for the final model
+- [ ] Add an AUC-ROC comparison chart across all 8 models
+- [ ] Containerize with Docker for consistent local + prod environments
+- [ ] Add unit tests for the pipeline modules
+- [ ] Replace hardcoded log paths with configurable, relative paths
 
-False Negative
+---
 
-Classification Report
 
-Provides:
+**Built by [Vihara Tech](#)** — *Learn · Intern · Get Placed*
 
-Precision
-
-Recall
-
-F1-score
-
-Support
-
-📝 Logging
-
-The project includes a logging module to record information and errors during execution.
-
-Log files can be stored inside the logs directory.
-
-✨ Key Features
-
-❤️ Heart disease prediction
-
-🧹 Data preprocessing
-
-📊 Feature selection
-
-🔄 Outlier handling
-
-⚖️ SMOTE data balancing
-
-📏 Standard scaling
-
-🤖 Multiple ML algorithms
-
-📈 Model evaluation
-
-💾 Model serialization
-
-🌐 Flask web application
-
-📝 Logging and exception handling
-
-⚠️ Disclaimer
-
-This project is developed for educational and demonstration purposes only. It should not be used as a substitute for professional medical diagnosis or medical advice.
-
-👩‍💻 Author
-
-Monisha G E
-
-B.Tech – Computer Science and Engineering
-
-🏢 Organization
-
-Vihara Tech
-
-Learn • Intern • Get Placed
+</div>
