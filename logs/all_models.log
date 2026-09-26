@@ -1,0 +1,106 @@
+2026-09-26 11:36:46,701 - INFO - =============KNN=====================
+2026-09-26 11:36:46,710 - INFO - Test Data Accuracy : 0.8524590163934426
+2026-09-26 11:36:46,718 - INFO - Test Data Confusion Matrix : [[28  1]
+ [ 8 24]]
+2026-09-26 11:36:46,746 - INFO - Test Data Classification Report  :               precision    recall  f1-score   support
+
+           0       0.78      0.97      0.86        29
+           1       0.96      0.75      0.84        32
+
+    accuracy                           0.85        61
+   macro avg       0.87      0.86      0.85        61
+weighted avg       0.87      0.85      0.85        61
+
+2026-09-26 11:36:46,746 - INFO - =============Naive Bayes=====================
+2026-09-26 11:36:46,752 - INFO - Test Data Accuracy : 0.8524590163934426
+2026-09-26 11:36:46,755 - INFO - Test Data Confusion Matrix : [[25  4]
+ [ 5 27]]
+2026-09-26 11:36:46,768 - INFO - Test Data Classification Report  :               precision    recall  f1-score   support
+
+           0       0.83      0.86      0.85        29
+           1       0.87      0.84      0.86        32
+
+    accuracy                           0.85        61
+   macro avg       0.85      0.85      0.85        61
+weighted avg       0.85      0.85      0.85        61
+
+2026-09-26 11:36:46,769 - INFO - =============Logistic Regression=====================
+2026-09-26 11:36:46,789 - INFO - Test Data Accuracy : 0.8524590163934426
+2026-09-26 11:36:46,793 - INFO - Test Data Confusion Matrix : [[24  5]
+ [ 4 28]]
+2026-09-26 11:36:46,810 - INFO - Test Data Classification Report  :               precision    recall  f1-score   support
+
+           0       0.86      0.83      0.84        29
+           1       0.85      0.88      0.86        32
+
+    accuracy                           0.85        61
+   macro avg       0.85      0.85      0.85        61
+weighted avg       0.85      0.85      0.85        61
+
+2026-09-26 11:36:46,810 - INFO - =============Decision Tree=====================
+2026-09-26 11:36:46,814 - INFO - Test Data Accuracy : 0.6065573770491803
+2026-09-26 11:36:46,816 - INFO - Test Data Confusion Matrix : [[23  6]
+ [18 14]]
+2026-09-26 11:36:46,837 - INFO - Test Data Classification Report  :               precision    recall  f1-score   support
+
+           0       0.56      0.79      0.66        29
+           1       0.70      0.44      0.54        32
+
+    accuracy                           0.61        61
+   macro avg       0.63      0.62      0.60        61
+weighted avg       0.63      0.61      0.59        61
+
+2026-09-26 11:36:46,837 - INFO - =============Random Forest=====================
+2026-09-26 11:36:46,867 - INFO - Test Data Accuracy : 0.7213114754098361
+2026-09-26 11:36:46,872 - INFO - Test Data Confusion Matrix : [[26  3]
+ [14 18]]
+2026-09-26 11:36:46,891 - INFO - Test Data Classification Report  :               precision    recall  f1-score   support
+
+           0       0.65      0.90      0.75        29
+           1       0.86      0.56      0.68        32
+
+    accuracy                           0.72        61
+   macro avg       0.75      0.73      0.72        61
+weighted avg       0.76      0.72      0.71        61
+
+2026-09-26 11:36:46,891 - INFO - =============Adaboost=====================
+2026-09-26 11:36:46,935 - INFO - Test Data Accuracy : 0.8032786885245902
+2026-09-26 11:36:46,942 - INFO - Test Data Confusion Matrix : [[22  7]
+ [ 5 27]]
+2026-09-26 11:36:46,954 - INFO - Test Data Classification Report  :               precision    recall  f1-score   support
+
+           0       0.81      0.76      0.79        29
+           1       0.79      0.84      0.82        32
+
+    accuracy                           0.80        61
+   macro avg       0.80      0.80      0.80        61
+weighted avg       0.80      0.80      0.80        61
+
+2026-09-26 11:36:46,954 - INFO - =============Gradient Boosting=====================
+2026-09-26 11:36:46,978 - INFO - Test Data Accuracy : 0.7868852459016393
+2026-09-26 11:36:46,981 - INFO - Test Data Confusion Matrix : [[26  3]
+ [10 22]]
+2026-09-26 11:36:46,999 - INFO - Test Data Classification Report  :               precision    recall  f1-score   support
+
+           0       0.72      0.90      0.80        29
+           1       0.88      0.69      0.77        32
+
+    accuracy                           0.79        61
+   macro avg       0.80      0.79      0.79        61
+weighted avg       0.80      0.79      0.79        61
+
+2026-09-26 11:36:46,999 - INFO - =============Xtreme Gradient Boosting=====================
+2026-09-26 11:36:47,111 - INFO - Test Data Accuracy : 0.6885245901639344
+2026-09-26 11:36:47,115 - INFO - Test Data Confusion Matrix : [[26  3]
+ [16 16]]
+2026-09-26 11:36:47,136 - INFO - Test Data Classification Report  :               precision    recall  f1-score   support
+
+           0       0.62      0.90      0.73        29
+           1       0.84      0.50      0.63        32
+
+    accuracy                           0.69        61
+   macro avg       0.73      0.70      0.68        61
+weighted avg       0.74      0.69      0.68        61
+
+2026-09-26 11:36:47,136 - INFO - ===========AUC and ROC=======================
+2026-09-26 11:36:47,136 - INFO - Error in line no : 181 : due to : <class 'NameError'> : reason : name 'auc_roc_curve_structure' is not defined
